@@ -1,11 +1,6 @@
- import React from "react";
+import React from "react";
+import Routes from "./components/Routes";
 
-function App() {
-  return (
-    <div>
-Hello depuis app
-    </div>
-  );
+export default function App() {
+  return <Routes />;
 }
-
-export default App;
