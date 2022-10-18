@@ -37,7 +37,8 @@ module.exports.signIn = async (req, res) => {
 };
 
 module.exports.logout = (req, res) =>{
-  res.cookie('jwt', '', {maxAge: 1});
+  console.log("ici");
+  res.clearCookie('jwt', '', {maxAge: 1}, {httpOnly: true});
   res.redirect("/");
 };
 

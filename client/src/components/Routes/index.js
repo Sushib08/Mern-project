@@ -1,13 +1,15 @@
 import React from "react";
 // import { render } from "react-dom";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Home from "../../pages/Home";
 import Profil from "../../pages/Profil";
 import Trending from "../../pages/Trending";
+import Navbar from "../Navbar";
 
 function index() {
   return (
-    <div>
+    <BrowserRouter>
+      <Navbar />
       <Switch>
         <Route path="/profil">
           <Profil />
@@ -21,7 +23,7 @@ function index() {
         <Redirect to="/" />
         {/* <Route path="*" element={<Navigate to="/" replace />}></Route> */}
       </Switch>
-    </div>
+    </BrowserRouter>
   );
 }
 export default index;
