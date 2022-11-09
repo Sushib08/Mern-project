@@ -68,7 +68,7 @@ export const unfollowUser = (followerId, idToUnFollow) => {
       data: { idToUnFollow },
     })
       .then((res) => {
-        dispatch({ type: FOLLOW_USER, payload: { idToUnFollow } });
+        dispatch({ type: UNFOLLOW_USER, payload: { idToUnFollow } });
       })
       .catch((err) => console.log(err));
   };

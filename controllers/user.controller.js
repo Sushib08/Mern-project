@@ -58,14 +58,14 @@ module.exports.follow = async (req, res) => {
 
   try {
     // add to the follower list
-    const follower = await UserModel.findByIdAndUpdate(
+    await UserModel.findByIdAndUpdate(
       req.params.id,
       { $addToSet: { following: req.body.idToFollow } },
       { new: true, upsert: true }
     ).select("-password");
 
     // add to following list
-    const following = await UserModel.findByIdAndUpdate(
+    await UserModel.findByIdAndUpdate(
       req.body.idToFollow,
       { $addToSet: { followers: req.params.id } },
       { new: true, upsert: true }
@@ -86,14 +86,14 @@ module.exports.unfollow = async (req, res) => {
 
   try {
     // delete to the follower list
-    const follower = await UserModel.findByIdAndUpdate(
+    await UserModel.findByIdAndUpdate(
       req.params.id,
       { $pull: { following: req.body.idToUnFollow } },
       { new: true, upsert: true }
     ).select("-password");
 
     // delete to following list
-    const following = await UserModel.findByIdAndUpdate(
+    await UserModel.findByIdAndUpdate(
       req.body.idToUnFollow,
       { $pull: { followers: req.params.id } },
       { new: true, upsert: true }
