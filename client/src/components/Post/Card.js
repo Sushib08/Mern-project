@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { FollowHandler } from "../Profil/FollowHandler";
 import { dateParser, isEmpty } from "../Utils";
 import ReactPlayer from 'react-player'
+import { LikeButton } from "./LikeButton";
 
 
 export const Card = ({ post }) => {
@@ -73,7 +74,7 @@ export const Card = ({ post }) => {
                 <img src="./img/icons/message1.svg" alt="comment" />
                 <span>{post.comments.length}</span>
               </div>
-              <h6>Like button</h6>
+              <LikeButton post={post}/>
               <img src="./img/icons/share.svg" alt="share" />
             </div>
           </div>
