@@ -11,6 +11,7 @@ const UpdateProfil = () => {
   const [updateForm, setUpdateForm] = useState(false);
   const userData = useSelector((state) => state.userReducer);
   const usersData = useSelector((state) => state.usersReducer);
+  const error = useSelector((state) => state.errorReducer.userError);
   const dispatch = useDispatch();
   const [followingPopup, setFollowingPopup] = useState(false);
   const [followersPopup, setFollowersPopup] = useState(false);
@@ -29,6 +30,8 @@ const UpdateProfil = () => {
           <h3>Photo de profil</h3>
           <img src={userData.picture} alt="user-pic" />
           <UploadImg />
+          <p>{error.maxSize}</p>
+          <p>{error.format}</p>
         </div>
         <div className="right-part">
           <div className="bio-update">
@@ -60,18 +63,29 @@ const UpdateProfil = () => {
               : ""}
           </h4>
           <h5 onClick={() => setFollowingPopup(true)}>
-            Abonnement(s) :{" "}
-            {userData.following ? userData.following.length : ""}
+            Abonnement
+            {userData.following && userData.following.length > 1
+              ? "s"
+              : null} : {userData.following ? userData.following.length : ""}
           </h5>
           <h5 onClick={() => setFollowersPopup(true)}>
-            Abonné(s) : {userData.followers ? userData.followers.length : ""}
+            Abonné
+            {userData.followers && userData.followers.length > 1
+              ? "s"
+              : null} : {userData.followers ? userData.followers.length : ""}
           </h5>
         </div>
       </div>
       {followingPopup && (
         <div className="popup-profil-container">
           <div className="modal">
-            <h3>Abonnement(s)</h3>
+            <h3>
+              Abonnement
+              {userData.following && userData.following.length > 1
+                ? "s"
+                : null}{" "}
+              : {userData.following ? userData.following.length : ""}
+            </h3>
             <span className="cross" onClick={() => setFollowingPopup(false)}>
               &#10005;
             </span>
@@ -84,7 +98,10 @@ const UpdateProfil = () => {
                         <img src={user.picture} alt="user-pic" />
                         <h4>{user.pseudo}</h4>
                         <div className="follow-handler">
-                          <FollowHandler idToFollow={user._id} type={'suggestion'} />
+                          <FollowHandler
+                            idToFollow={user._id}
+                            type={"suggestion"}
+                          />
                         </div>
                       </li>
                     );
@@ -99,7 +116,13 @@ const UpdateProfil = () => {
       {followersPopup && (
         <div className="popup-profil-container">
           <div className="modal">
-            <h3>Abonné(s)</h3>
+            <h3>
+              Abonné
+              {userData.followers && userData.followers.length > 1
+                ? "s"
+                : null}{" "}
+              : {userData.followers ? userData.followers.length : ""}
+            </h3>
             <span className="cross" onClick={() => setFollowersPopup(false)}>
               &#10005;
             </span>
@@ -112,7 +135,10 @@ const UpdateProfil = () => {
                         <img src={user.picture} alt="user-pic" />
                         <h4>{user.pseudo}</h4>
                         <div className="follow-handler">
-                          <FollowHandler idToFollow={user._id} type={'suggestion'}/>
+                          <FollowHandler
+                            idToFollow={user._id}
+                            type={"suggestion"}
+                          />
                         </div>
                       </li>
                     );
